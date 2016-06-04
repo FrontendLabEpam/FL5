@@ -94,38 +94,115 @@ There is a rule in CSS that tells all browsers to follow the more logical IE app
 
 This is particularly helpful when dealing with fluid layouts or creating mobile-friendly sites.
 
----
 
-class: left, middle
+---
 
 # Box displays
 
 **Display** is a CSS rule that helps us redefine the default box treatment of elements.
 
-```css
-   span {display: block;}      // Make any element a block-level element. 
-                                  This span will have all the properties of a block element,
-                                  and will be taking the whole container width.
 
-   div {display: inline;}      // Make any element an inline-level element. 
-                                  This div will lose all it's block properties.
-
-   a {display: inline-block;}  // Gives the block properties to an element,
-                                  but doesn't take up the whole container width.
-                                  Treats spaces within element like spaces in the text.
-
-   section {display: table;}   // Makes a box to behave like a table. Then it's children 
-                                  can be styled using properties like {display: table-cell}, 
-                                  {display:table-row} etc.
-
-   div {display: flex;}        // Enables the flexbox model. Read on it separately.
-                                  The support for it is quite different across browsers, 
-                                  but the features
-                                  it offers are very handy (e.g. vertical centering).
-    
-   p {display: none;}          // This just removes an element from a document flow.
-
+.columns[.col-40[
+``` css
+    span {display: block;}
 ```
+].col-60[
+``` css
+      // Make any element a block-level element. This
+      span will have all the properties of a block
+      element, and will be taking the whole container
+      width.
+```
+]]
+
+.columns[.col-40[
+``` css
+    div {display: inline;}
+```
+].col-60[
+``` css
+      // Make any element an inline-level element.
+      This div will lose all it's block properties.
+```
+]]
+
+.columns[.col-40[
+``` css
+      a {display: inline-block;}
+```
+].col-60[
+``` css
+      // Gives the block properties to an element,
+      but doesn't take up the whole container width.
+      Treats spaces within element like spaces in the text.
+```
+]]
+
+.columns[.col-40[
+``` css
+      section {display: table;}
+```
+].col-60[
+``` css
+      // Makes a box to behave like a table. Then it's
+      children can be styled using properties like
+      {display: table-cell}, {display:table-row} etc.
+```
+]]
+
+.columns[.col-40[
+``` css
+      p {display: none;}
+```
+].col-60[
+``` css
+      // This just removes an element from a
+      document flow.
+```
+]]
+
+---
+
+# Box displays
+
+**Display** is a CSS rule that helps us redefine the default box treatment of elements.
+
+.columns[.col-40[
+``` css
+      div {display: flex;}
+```
+].col-60[
+``` css
+      // Enables the flexbox model. Flexbox is a
+      new layout mode in CSS3. Use of flexbox
+      ensures that elements behave predictably when
+      the page layout must accommodate different
+      screen sizes and different display devices.
+```
+]]
+
+.columns[.col-40[
+``` css
+      .container{ display: grid}
+      .container{ display: inline-grid}
+```
+].col-60[
+``` css
+      // Enables the grid model. This CSS module
+      defines a two-dimensional grid-based layout
+      system, optimized for user interface design.
+      In the grid layout model, the children of a
+      grid container can be positioned into arbitrary
+      slots in a predefined flexible or fixed-size
+      layout grid.
+```
+]]
+
+.columns[.col-40[
+&nbsp;
+].col-60[
+[Read more about grid layout](https://css-tricks.com/snippets/css/complete-guide-grid/)
+]]
 
 ---
 
@@ -179,9 +256,9 @@ Top and bottom margins of blocks are sometimes combined into a single margin who
 
 If there is no border, padding, inline content, or clearance to separate the margin-top of a block with the margin-top of its first child block, or no border, padding, inline content, height, min-height, or max-height to separate the margin-bottom of a block with the margin-bottom of its last child, then those margins collapse. **The collapsed margin ends up outside the parent**.
 
-## Empty blocks
+## Do not collapse
 
-If there is no border, padding, inline content, height, or min-height to separate a block's margin-top from its margin-bottom, then **its top and bottom margins collapse**.
+Margins of floating and absolutely positioned elements never collapse.
 ---
 ## Visible
 
@@ -278,7 +355,7 @@ Further reading at <a href="http://css-tricks.com/almanac/properties/z/z-index/"
 class: left, middle
 #Floats
 
-Floating allow us to position elements within a container without taking them from the document flow. If enabled, element will be floating either left, or right, and all other content will be wrapping it.
+The float CSS property specifies that an element should be taken from the normal flow and placed along the left or right side of its container, where text and inline elements will wrap around it.
 
 <figure style="text-align: center;">
     
@@ -335,7 +412,7 @@ To solve the issue of collapsing parents we can use several techniques:
 
 ```css
     .parent:after { 
-       content: ""; 
+       content: "";
        visibility: hidden; 
        display: block; 
        height: 0; 
@@ -344,6 +421,266 @@ To solve the issue of collapsing parents we can use several techniques:
 ```
 
 Further reading at <a href="http://css-tricks.com/almanac/properties/f/float/">css-tricks</a>
+      
+---
+class: center, middle
+     #Flexbox
+
+.center[
+[Browser support](http://caniuse.com/#feat=flexbox)
+]
+.center[
+      [Read more](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+]
+
+
+---
+.center[
+<img src="images/flex-direction-terms.svg" alt="">
+      ]
+      <style>
+        .flex-description {
+          font-size: 19px;
+        }
+        .flex-description b {
+          font-size: 21px;
+        }
+      </style>
+<ul class="flex-description">
+  <li> <b>main axis</b> - The main axis of a flex container is the primary axis along which flex items are laid out.</li>
+  <li> <b>main-start | main-end</b> - The flex items are placed within the container starting on the main-start side and going toward the main-end side.</li>
+  <li><b>main size</b> - A flex item’s width or height, whichever is in the main dimension, is the item’s main size. The flex item’s main size property is either the width or height property, whichever is in the main dimension.</li>
+  <li><b>cross axis</b> - The axis perpendicular to the main axis is called the cross axis. It extends in the cross dimension.</li>
+  <li><b>cross-start | cross-end</b> - Flex lines are filled with items and placed into the container starting on the cross-start side of the flex container and going toward the cross-end side.</li>
+  <li><b>cross size</b> - The width or height of a flex item, whichever is in the cross dimension, is the item’s cross size. The cross size property is whichever of width or height that is in the cross dimension.</li>
+</ul>
+---
+
+# Container Properties
+
+## display: flex | inline-flex;
+
+This defines a flex container; inline or block depending on the given value. It enables a flex context for all its direct children.
+```css
+      .container {
+        display: flex | inline-flex;
+      }
+```
+
+**Note**: `float`, `clear` and `vertical-align` do not work with flex-elements
+<br/>
+## flex-direction
+      
+This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Flexbox is (aside from optional wrapping) a single-direction layout concept. Think of flex items as primarily laying out either in horizontal rows or vertical columns.
+.center[<img src="images/flex-direction1.svg" alt="">]
+
+```css
+      .container {
+        flex-direction: row | row-reverse | column | column-reverse
+      }
+```
+
+---
+
+# Container Properties
+
+## flex-wrap
+
+By default, flex items will all try to fit onto one line. You can change that and allow the items to wrap
+.center[<img src="images/flex-wrap.svg" alt="">]
+```css
+      .container {
+        flex-wrap: nowrap | wrap | wrap-reverse;
+      }
+```
+## flex-flow
+This is a shorthand flex-direction and flex-wrap properties, which together define the flex container's main and cross axes. Default is row nowrap.
+
+
+```css
+      .container {
+        flex-flow: <‘flex-direction’> || <‘flex-wrap’>
+        /*flex-flow: column nowrap*/
+      }
+```
+
+---
+# Container Properties
+
+## justify-content
+
+This defines the alignment along the main axis.
+.center[<img src="images/justify-content.png" alt="">]
+```css
+      .container {
+        justify-content: flex-start | flex-end | center | space-between | space-around;
+      }
+```
+---
+# Container Properties
+
+## align-items
+This defines the default behaviour for how flex items are laid out along the cross axis on the current line.
+.center[<img src="images/align-items.png" alt="">]
+
+```css
+      .container {
+         align-items: flex-start | flex-end | center | baseline | stretch;
+      }
+```
+---
+# Container Properties
+
+## align-content
+This aligns a flex container's lines within when there is extra space in the cross-axis.
+.center[<img style="height: 350px" src="images/align-content.png" alt="">]
+
+```css
+      .container {
+         align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+      }
+```
+      
+---
+# Elements Properties
+
+## order
+ The order property controls the order in which they appear in the flex container.
+.center[<img style="height: 350px" src="images/order-2.svg" alt="">]
+
+```css
+      .item {
+        order: <integer>;
+      }
+```
+
+---
+# Elements Properties
+
+## flex-grow
+ This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion. It dictates what amount of the available space inside the flex container the item should take up.
+.center[<img style="" src="images/flex-grow.svg" alt="">]
+
+```css
+      .item {
+        flex-grow: <number>; /* default 0 */
+      }
+```
+
+---
+# Elements Properties
+
+## flex-shrink
+ This defines the ability for a flex item to shrink if necessary.
+
+```css
+      .item {
+        flex-shrink: <number> (default 1)
+      }
+```
+
+<br><br>
+## flex-basis
+ This defines the default size of an element before the remaining space is distributed.
+The `auto` keyword means "look at my width or height property"
+
+```css
+      .item {
+        flex-basis: <length> | auto; /* default auto */
+      }
+```
+---
+# Elements Properties
+## flex
+ This is the shorthand for flex-grow, flex-shrink and flex-basis combined.
+The second and third parameters (`flex-shrink` and `flex-basis`) are optional. Default is 0 1 auto.
+
+```css
+      .item {
+        flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]
+      }
+```
+---
+# Elements Properties
+## align-self
+ This allows the default alignment (or the one specified by `align-items`) to be overridden for individual flex items.
+.center[<img style="height: 200px;" src="images/align-self.svg" alt="">]
+
+```css
+      .item {
+        align-self: auto | flex-start | flex-end | center | baseline | stretch;
+      }
+```
+
+---
+class: center
+# Grow. How to calculate [spec](https://www.w3.org/TR/css-flexbox-1/#resolve-flexible-lengths)
+.center[<img style="" src="images/grow.png" alt="">]
+.center[
+  > Available space = (container size - flex-basis siblings total)
+]
+.center[
+  > Available space = 600 - 300 = 300
+]
+<BR>
+<BR>
+.center[
+  > Grow unit = (Available space / Sum Grow siblings total)
+]
+.center[
+  > Grow unit = 300 / ( 2 + 0 + 2 ) = 75
+]
+<BR>
+<BR>
+.center[
+  > Flex item size = (Flex basis + (Grow Unit * flexGrowNum))
+]
+.center[
+  > Flex item size (1) = (100px + (75 * 2)) = 250px
+]
+.center[
+  > Flex item size (2) = (150px + (75 * 0)) = 150px
+]
+.center[
+  > Flex item size (3) = (50px + (75 * 2)) = 200px
+]
+
+---
+class: center
+# Shrink. How to calculate [spec](https://www.w3.org/TR/css-flexbox-1/#resolve-flexible-lengths)
+.center[<img style="" src="images/shrink.png" alt="">]
+.center[
+  > Container width of 600px and a negative available space (-200px)
+]
+<BR>
+<BR>
+.center[
+  > Item 1 (1x 200) + Item 2 (2 x 200) + Item 3 (3 x 200) + Item 4 (1 x 200) = Total items (1400)
+]
+<BR>
+<BR>
+.center[
+  > Item 2 shrink factor = Item 2 (2 x 200px) / Total Items (1400) = 0.286
+]
+<BR>
+<BR>
+.center[
+  > Space removed from Item 2 = Item 2 shrink factor (0.286) x Negative space (-200px) = -57.142. Rounded down to 57.
+]
+---
+class: center, middle
+# Play with flexboxes
+
+[Flexbox](https://demos.scotch.io/visual-guide-to-css3-flexbox-flexbox-playground/demos/)
+
+---
+class: center, middle
+# Practice
+.center[[Float](images/float_layout.png)]
+<br>
+.center[[Flex](images/flex_layout.png)]
+
+
 
 ---
 class: left, middle
