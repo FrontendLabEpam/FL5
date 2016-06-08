@@ -74,6 +74,8 @@ class: center, middle
 - Plus there is a standard property
 - There are syntax differences between browser-specific properties and the standard property
 
+**Note**: You get not valid css code :(
+
 
   **Ideally:**
   ```css
@@ -101,8 +103,9 @@ class: center, middle
 
 # CSS3 & Cross-browser Coding
 
-- Place default properties first
-- Place browser-specific properties ahead of standard properties
+- fallback
+- Place browser-specific properties first
+- Place default properties ahead of browser-specific properties
 - The standard properties will override the vendor’s when the standard is established.
 
 ```css
@@ -113,10 +116,14 @@ class: center, middle
   background: -webkit-linear-gradient(top,  #f0f9ff 0%,#a1dbff 100%); /* Chrome10+,Safari5.1+ */
   background: -o-linear-gradient(top,  #f0f9ff 0%,#a1dbff 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top,  #f0f9ff 0%,#a1dbff 100%); /* IE10+ */
-  background: linear-gradient(to bottom,  #f0f9ff 0%,#a1dbff 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#a1dbff',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(to bottom,  #f0f9ff 0%,#a1dbff 100%); /* W3C */
 }
 ```
+<br>
+[proof-1](https://css-tricks.com/ordering-css3-properties/)
+<br>
+[proof-1](http://stackoverflow.com/questions/7080605/ordering-of-vendor-specific-css-declarations)
 
 
 
@@ -217,7 +224,10 @@ layout: true
   ![HSLA](assets/img/hsla-wheel.jpg)
 ]]
 
-
+<a href="https://css-tricks.com/yay-for-hsla/"
+   style="position: absolute; top:84%; right:0;">
+  <img src="assets/img/yes-moar-of-that-biden.jpg" alt="" style="width: 160px">
+</a>
 
 ---
 ### Webfonts formats
@@ -232,11 +242,11 @@ layout: true
 ```css
 @font-face {
     font-family: 'robotoblack';
-    src: url('Roboto-Black-webfont.eot'); /* IE only */
-    src: url('Roboto-Black-webfont.eot?#iefix') format('embedded-opentype'),
-         url('Roboto-Black-webfont.woff') format('woff'), /* Compressed, emerging standard.  */
-         url('Roboto-Black-webfont.ttf') format('truetype'), /* Works in most browsers except IE and iPhone. */
-         url('Roboto-Black-webfont.svg#robotoblack') format('svg'); /* iPhone/iPad */
+    src: url('Roboto-Black-webfont.eot'); /* IE9 Compat Modes */
+    src: url('Roboto-Black-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('Roboto-Black-webfont.woff') format('woff'), /* Super Modern Browsers */
+         url('Roboto-Black-webfont.ttf') format('truetype'), /* Pretty Modern Browsers */
+         url('Roboto-Black-webfont.svg#robotoblack') format('svg'); /* Legacy iOS */
     font-weight: normal;
     font-style: normal;
 }
@@ -247,13 +257,11 @@ h1 {
 Alternative:
 ```css
 @font-face {
-  font-family: 'WebFont';
-  src: url('myfont.woff') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-       url('myfont.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+  font-family: 'MyWebFont';
+  src:  url('myfont.woff2') format('woff2'),
+        url('myfont.woff') format('woff');
 }
 ```
-
-
 ---
 
 
@@ -279,8 +287,32 @@ Example:
   ```
 ]]
 
+---
 
 
+### Webfonts
+
+
+
+```css
+    @import url(//fonts.googleapis.com/css?family=Open+Sans);
+```
+
+or
+
+```html
+    <link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+```
+
+```css
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+```
+
+e.g. [Google fonts](https://www.google.com/fonts)
+
+[Read More](https://css-tricks.com/snippets/css/using-font-face/)
 ---
 
 
@@ -322,6 +354,8 @@ Example:
 
 ### Border radius
 ![border radius](assets/img/css_border-radius_1.png)
+
+[Live](http://jsbin.com/yevevux/6/edit?html,output)
 ---
 
 ### Opacity
@@ -377,8 +411,11 @@ box-shadow: 3px 3px red, -1em 0 0.4em olive;
 
 ---
 ### Box shadow
-.center[![box shadow 1](assets/img/box-shadow-3.png)]
 
+.center[
+<img src="assets/img/box-shadow-3.png" alt="" height="500px">
+]
+[Spread](http://jsbin.com/henimog/1/edit?html,output)
 ---
 
 
@@ -528,44 +565,6 @@ Possible values
 <p class="clip">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, cum dolor ea earum fuga harum incidunt iste molestiae quae totam. Facilis fugiat, itaque laboriosam laborum nostrum quibusdam sunt veniam voluptates.</p>
 
 ---
-### Border image
-
-- Defines an image to be used instead of the normal border of an element.
-- IE lt11 does not support
-
-Formal syntax:
-```css
-border-image: none | [ <URL> [<number> | <percent>]{1,4} [/ <width>{1,4}]? ]
-              && [stretch | repeat | round]{0,2}
-```
-Common syntax
-```css
-/* image-source | height | width | repeat */
-border-image: url("/images/border.png") 30 30 repeat;
-border-image: url("/images/border.png") 30 30 stretch;
-```
----
-### Border image
-.columns[.col-100[
-```html
-<img src="http://img-fotki.yandex.ru/get/3102/yoksel.31/0_1d0a3_1b360496_M.jpg" alt="" class="indian">
-```
-```css
-.indian {
-  border: 90px solid transparent;
-  border-image: url(http://url-path.png) 14% 20% stretch round;
-}
-
-```
-].col-100[
-<a href="http://jsbin.com/homerat/edit?css,output">
-  <img src="http://img-fotki.yandex.ru/get/9165/5091629.99/0_7eb49_5c917238_XL.png" height="300" align="center" alt="">
-  <img src="http://img-fotki.yandex.ru/get/3102/yoksel.31/0_1d0a3_1b360496_M.jpg" alt="">
-</a>
-]]
-
-
----
 
 ### Gradient background
 
@@ -663,6 +662,99 @@ background: repeating-linear-gradient(
   ![gradient 1](assets/img/gradient-1.jpg)
 ].col-50[
   ![gradient 2](assets/img/gradient-2.jpg)
+]]
+
+
+---
+### Border image
+
+- Defines an image to be used instead of the normal border of an element.
+- IE lt11 does not support
+
+Formal syntax:
+```css
+border-image: none | [ <URL> [<number> | <percent>]{1,4} [/ <width>{1,4}]? ]
+              && [stretch | repeat | round]{0,2}
+```
+Common syntax
+```css
+/* border-image-source | border-image-slice | border-image-slice | border-image-repeat */
+border-image: url("/images/border.png") 30 30 repeat;
+border-image: url("/images/border.png") 30 30 stretch;
+```
+
+
+---
+<style>
+  .border-img {
+    background-size: 4em;
+    text-align: center;
+    font-size: 15px;
+  }
+  .border-img.text {
+    margin-top: 2em;
+    box-sizing: border-box;
+
+    border: 3em solid yellow;
+    border-image: radial-gradient(rgba(0,0,0,.5) ,rgba(255,255,255,0) 45%) 25% 33% 40% 25%;
+  }
+  .border-img .text-inner {
+    padding: 2em;
+    background: white;
+  }
+</style>
+
+### border-image-source
+
+<div class="text border-img">
+      <div class="text-inner">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur odio sem, vel volutpat felis accumsan sit amet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam ac augue eu mi lacinia egestas.</div>
+</div>
+
+---
+
+### Border image slice
+
+An important property that determines the size of the image pieces that fill the corners of the frame.
+The remaining part of border-image will be used to fill the space between the corners of the algorithm set in the `border-image-repeat`.
+.center[
+<img src="assets/img/border-image-slice.png" alt="" width="400" align="middle">
+]
+
+---
+
+### Border image slice
+- `<Percentage>` - calculated with respect to the image size. Horizontal is relative to width of image, vertical is relative to height.
+- `<Number>` - pixels (for bitmap images) or coordinates (for vector). Units are not listed.
+
+---
+
+
+### Border image repeat
+
+It specifies how to be filled in the gaps between the corners.
+
+Possible values are:
+- `stretch` - stretch the filling portion pictures. The default value;
+- `repeat` - repeats the filling portion;
+---
+
+### Border image
+.columns[.col-100[
+```html
+<img src="http://img-fotki.yandex.ru/get/3102/yoksel.31/0_1d0a3_1b360496_M.jpg" alt="" class="indian">
+```
+```css
+.indian {
+  border: 90px solid transparent;
+  border-image: url(http://url-path.png) 14% 20% stretch round;
+}
+
+```
+].col-100[
+<a href="http://jsbin.com/homerat/10/edit?css,output">
+  <img src="http://img-fotki.yandex.ru/get/9165/5091629.99/0_7eb49_5c917238_XL.png" height="300" align="center" alt="">
+  <img src="http://img-fotki.yandex.ru/get/3102/yoksel.31/0_1d0a3_1b360496_M.jpg" alt="">
+</a>
 ]]
 
 
