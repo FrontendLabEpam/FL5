@@ -9,7 +9,7 @@
     <link href="../assets/css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-  
+
 <div class="wrapper">
   <header class="mainheader">
     <div class="logo">
@@ -50,7 +50,7 @@ Front-end training
   converts to:
 
   ``` html
-  
+
   <ul class="emmet">
     <li><a href=""></a></li>
     <li><a href=""></a></li>
@@ -197,327 +197,14 @@ HTML5 Boilerplate helps you build fast, robust, and adaptable web apps or sites.
 ]]
 
 
-
 ---
 
-
-
-#LESS, SASS (SCSS)
-
-Less and SASS are a CSS pre-processors, meaning that it extends the CSS language, adding features that allow variables, mixins, functions and many other techniques that allow you to make CSS that is more maintainable, themable and extendable.
-
-.columns[.col-50[
-
-  ![LESS](assets/img/LESS_view.png)
-
-  .center[
-    [http://lesscss.org/](http://lesscss.org/)
-  ]
-
-].col-50[
-
-  ![SASS](assets/img/SASS_view.png)
-
-  .center[
-    [http://sass-lang.com/](http://sass-lang.com/)
-  ]
-
-]]
-
-
----
-
-layout:true
-
-#SCSS features
-
----
-
-## variables and nestings
-.columns[.col-60[
-
-  ``` scss
-  /* Variables */
-  $base: #000;
-  $navLinkColor: $base;
-
-  /* Navigation */
-  .footer-nav {
-      ul {
-          margin: 0;
-          padding: 0;
-
-          li { 
-              display: inline-block; 
-
-              a {
-                  border-color: $base;
-                  color: $navLinkColor;
-
-                  &:hover {
-                    color: lighten($navLinkColor, 20%);
-                  }
-              }
-          }
-      }
-  }
-
-  ```
-  
-].col-40[
-
-  ``` css
-    .footer-nav ul {
-      margin: 0;
-      padding: 0;
-    }
-
-    .footer-nav ul li { 
-      display: inline-block; 
-    }
-
-    .footer-nav ul li a {
-      border-color: #000;
-      color: #000;
-    }
-
-    .footer-nav ul li a:hover {
-      color: #333;
-    }
-
-  ```
-
-]]
-
-
----
-
-
-
-## import and operators
-.columns[.col-60[
-  _reset.scss:
-  ``` scss
-  html, body, p, h1, h2, h3 {
-    margin: 0;
-    padding: 0;
-  }
-  ```
-  style.scss:
-  ``` scss
-  
-  @import 'reset';
-
-  body {
-    font: 100% Helvetica, sans-serif;
-    background-color: #efefef;
-  }
-
-  .userpic {
-    float: left;
-    width: 600px / 960px * 100%;
-  }
-
-  ```
-  
-].col-40[
-  style.css:
-  ``` css
-  html, body, p, h1, h2, h3 {
-    margin: 0;
-    padding: 0;
-  }
-
-  body {
-    font: 100% Helvetica, sans-serif;
-    background-color: #efefef;
-  }
-
-  .userpic {
-    float: left;
-    width: 62.5%;
-  }
-  ```
-
-]]
-
-
----
-
-
-## mixins and inheritance
-
-.columns.small[.col-50[
-  ``` scss
-  @mixin box-shadow($shadow) {
-  -webkit-box-shadow: $shadow;
-          box-shadow: $shadow;
-  }
-
-  .box { 
-    @include box-shadow(0 5px 10px 0 #000);
-    color: white;
-  }
-
-  .message {
-    border: 1px solid #ccc;
-    padding: 10px;
-  }
-  .success {
-    @extend .message;
-    border-color: green;
-  }
-  .error {
-    @extend .message;
-    border-color: red;
-  }
-  .warning {
-    @extend .message;
-    border-color: yellow;
-}
-
-  ```
-  
-].col-50[
-  ``` css
-  .box {
-    -webkit-box-shadow: 0 5px 10px 0 #000;
-            box-shadow: 0 5px 10px 0 #000;
-    color: white;
-  }
-
-  .message, .success, .error, .warning {
-    border: 1px solid #cccccc;
-    padding: 10px;
-    color: #333;
-  }
-  .success {
-    border-color: green;
-  }
-  .error {
-    border-color: red;
-  }
-  .warning {
-    border-color: yellow;
-  }
-  ```
-
-]]
-
----
-layout: false 
-
-
-#SASS + Compass
-
-.columns[.col-50[
-
-  Compass makes working with Sass even easier.
-
-  - Provides cross browser CSS3 mixins that take advantage of available pre-spec vendor prefixes.
-  - Provides basic mixins for common typography patterns.
-  - Provides basic mixins for common styling patterns.
-
-].col-50[
-
-  ![Compass](assets/img/compass_view.png)
-
-  .center[
-    [http://compass-style.org/](http://compass-style.org/)
-  ]
-
-]]
-
-
----
-
-
-#Jade, Haml
-
-
-Haml and Jade are based on one primary principle: markup should be beautiful. It accelerates and simplifies template creation.
-
-.columns[.col-50[
-
-  ![Haml](assets/img/haml_view.png)
-
-  .center[
-    [http://haml.info/](http://haml.info/ "http://haml.info/")
-  ]
-
-].col-50[
-
-  ![Jade](assets/img/jade_view.png)
-
-  .center[
-    [http://jade-lang.com/](http://jade-lang.com/)
-  ]
-
-]]
-
-
----
-
-
-#Jade Example
-
-
-.columns[.col-50[
-
-  ``` jade
-    doctype html
-    html(lang="en")
-      head
-        title= pageTitle
-      body
-        h1 Jade - node template engine
-        #container.col
-          if youAreUsingJade
-            p You are amazing
-          else
-            p Get on it!
-          p.
-            Jade is a terse and simple
-            templating language.
-
-  ```
-  
-].col-50[
-
-  ``` html
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <title>Jade</title>
-      </head>
-      <body>
-        <h1>Jade - node template engine</h1>
-        <div id="container" class="col">
-          <p>You are amazing</p>
-          <p>Jade is a terse and simple
-             templating language.</p>
-        </div>
-      </body>
-    </html>
-
-  ```
-
-]]
-
-
----
-
-
-#Compilers GUI apps
-
-- [CodeKit](http://incident57.com/codekit/) (Paid) _Mac_
-- [Compass.app](http://compass.handlino.com/) (Paid, Open Source) _Mac, Win, Linux_
-- [Ghostlab](http://www.vanamco.com/ghostlab/) (Paid) _Mac, Win_
-- [Hammer](http://hammerformac.com/) (Paid) _Mac_
-- [Koala](http://koala-app.com/) (Open Source) _Mac, Win, Linux_
-- [LiveReload](http://livereload.com/) (Paid, Open Source)  _Mac, Win_
-- [Prepros](https://prepros.io/) (Paid) _Mac, Win, Linux_
-- [Scout](http://mhs.github.io/scout-app/) (Open Source) _Mac, Win_
+# How to manage css on complex websites?
+
+- [Dozens of pages](https://www.behance.net/gallery/38120385/Field-Mobile-wireframe-kit)
+- [Repeatable UI elements](https://www.behance.net/gallery/14010225/PrasastiEnom-PSD-Dashboard-Webapp-Template)
+- [Big dashboards](https://dribbble.com/shots/1754800-Analytics-Dashboard-Design/attachments/285075)
+- [Complex UI with a lot of nested elements](https://dribbble.com/shots/2556394-Email-App)
 
 
 ---
@@ -564,7 +251,7 @@ layout: true
 
   Modules are the reusable, modular parts of our design. They are the callouts, the sidebar sections, the product lists and so on.
 
-  State rules are ways to describe how our modules or layouts will look when in a particular state. 
+  State rules are ways to describe how our modules or layouts will look when in a particular state.
 
   Theme rules are similar to state rules in that they describe how modules or layouts might look.
 
@@ -694,19 +381,19 @@ input[type=text] {
 h1, h2, a, p
 
 ###Layout
-.l-*  
+.l-*
 _(.l-header, .l-sidebar)_
 
 ###Module
-.< name >  
+.< name >
 _(.button, .news-item)_
 
 ###Sub-module
-.< name >-< type >  
+.< name >-< type >
 _(.button-secondary, .news-item-primary)_
 
 ###State
-.is-*  
+.is-*
 _(.is-active, .is-disabled, .is-open)_
 ].col-60[
 ```html
@@ -750,7 +437,7 @@ layout: false
 #BEM
 
 
-BEM stands for “Block”, “Element”, “Modifier”. It is a front-end methodology: a new way of thinking when developing Web interfaces. 
+BEM stands for “Block”, “Element”, “Modifier”. It is a front-end methodology: a new way of thinking when developing Web interfaces.
 
 ###BLOCK
 A block is an independent entity, a “building block” of an application. A block can be either simple or compound (containing other blocks).
@@ -789,6 +476,335 @@ An element is a part of a block that performs a certain function. Elements are c
 ---
 
 
+#Practice time!
+[SMACSS practice](practice/index.html)
+
+
+---
+
+
+
+#LESS, SASS (SCSS)
+
+Less and SASS are a CSS pre-processors, meaning that it extends the CSS language, adding features that allow variables, mixins, functions and many other techniques that allow you to make CSS that is more maintainable, themable and extendable.
+
+.columns[.col-50[
+
+  ![LESS](assets/img/LESS_view.png)
+
+  .center[
+    [http://lesscss.org/](http://lesscss.org/)
+  ]
+
+].col-50[
+
+  ![SASS](assets/img/SASS_view.png)
+
+  .center[
+    [http://sass-lang.com/](http://sass-lang.com/)
+  ]
+
+]]
+
+
+---
+
+layout:true
+
+#SCSS features
+
+---
+
+## variables and nestings
+.columns[.col-60[
+
+  ``` scss
+  /* Variables */
+  $base: #000;
+  $navLinkColor: $base;
+
+  /* Navigation */
+  .footer-nav {
+      ul {
+          margin: 0;
+          padding: 0;
+
+          li {
+              display: inline-block;
+
+              a {
+                  border-color: $base;
+                  color: $navLinkColor;
+
+                  &:hover {
+                    color: lighten($navLinkColor, 20%);
+                  }
+              }
+          }
+      }
+  }
+
+  ```
+
+].col-40[
+
+  ``` css
+    .footer-nav ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    .footer-nav ul li {
+      display: inline-block;
+    }
+
+    .footer-nav ul li a {
+      border-color: #000;
+      color: #000;
+    }
+
+    .footer-nav ul li a:hover {
+      color: #333;
+    }
+
+  ```
+
+]]
+
+
+---
+
+
+
+## import and operators
+.columns[.col-60[
+  _reset.scss:
+  ``` scss
+  html, body, p, h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+  }
+  ```
+  style.scss:
+  ``` scss
+
+  @import 'reset';
+
+  body {
+    font: 100% Helvetica, sans-serif;
+    background-color: #efefef;
+  }
+
+  .userpic {
+    float: left;
+    width: 600px / 960px * 100%;
+  }
+
+  ```
+
+].col-40[
+  style.css:
+  ``` css
+  html, body, p, h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font: 100% Helvetica, sans-serif;
+    background-color: #efefef;
+  }
+
+  .userpic {
+    float: left;
+    width: 62.5%;
+  }
+  ```
+
+]]
+
+
+---
+
+
+## mixins and inheritance
+
+.columns.small[.col-50[
+  ``` scss
+  @mixin box-shadow($shadow) {
+  -webkit-box-shadow: $shadow;
+          box-shadow: $shadow;
+  }
+
+  .box {
+    @include box-shadow(0 5px 10px 0 #000);
+    color: white;
+  }
+
+  .message {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  .success {
+    @extend .message;
+    border-color: green;
+  }
+  .error {
+    @extend .message;
+    border-color: red;
+  }
+  .warning {
+    @extend .message;
+    border-color: yellow;
+}
+
+  ```
+
+].col-50[
+  ``` css
+  .box {
+    -webkit-box-shadow: 0 5px 10px 0 #000;
+            box-shadow: 0 5px 10px 0 #000;
+    color: white;
+  }
+
+  .message, .success, .error, .warning {
+    border: 1px solid #cccccc;
+    padding: 10px;
+    color: #333;
+  }
+  .success {
+    border-color: green;
+  }
+  .error {
+    border-color: red;
+  }
+  .warning {
+    border-color: yellow;
+  }
+  ```
+
+]]
+
+---
+layout: false
+
+
+#SASS + Compass
+
+.columns[.col-50[
+
+  Compass makes working with Sass even easier.
+
+  - Provides cross browser CSS3 mixins that take advantage of available pre-spec vendor prefixes.
+  - Provides basic mixins for common typography patterns.
+  - Provides basic mixins for common styling patterns.
+
+].col-50[
+
+  ![Compass](assets/img/compass_view.png)
+
+  .center[
+    [http://compass-style.org/](http://compass-style.org/)
+  ]
+
+]]
+
+
+---
+
+
+#Jade, Haml
+
+
+Haml and Jade are based on one primary principle: markup should be beautiful. It accelerates and simplifies template creation.
+
+.columns[.col-50[
+
+  ![Haml](assets/img/haml_view.png)
+
+  .center[
+    [http://haml.info/](http://haml.info/ "http://haml.info/")
+  ]
+
+].col-50[
+
+  ![Jade](assets/img/jade_view.png)
+
+  .center[
+    [http://jade-lang.com/](http://jade-lang.com/)
+  ]
+
+]]
+
+
+---
+
+
+#Jade Example
+
+
+.columns[.col-50[
+
+  ``` jade
+    doctype html
+    html(lang="en")
+      head
+        title= pageTitle
+      body
+        h1 Jade - node template engine
+        #container.col
+          if youAreUsingJade
+            p You are amazing
+          else
+            p Get on it!
+          p.
+            Jade is a terse and simple
+            templating language.
+
+  ```
+
+].col-50[
+
+  ``` html
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <title>Jade</title>
+      </head>
+      <body>
+        <h1>Jade - node template engine</h1>
+        <div id="container" class="col">
+          <p>You are amazing</p>
+          <p>Jade is a terse and simple
+             templating language.</p>
+        </div>
+      </body>
+    </html>
+
+  ```
+
+]]
+
+
+---
+
+
+#Compilers GUI apps
+
+- [CodeKit](http://incident57.com/codekit/) (Paid) _Mac_
+- [Compass.app](http://compass.handlino.com/) (Paid, Open Source) _Mac, Win, Linux_
+- [Ghostlab](http://www.vanamco.com/ghostlab/) (Paid) _Mac, Win_
+- [Hammer](http://hammerformac.com/) (Paid) _Mac_
+- [Koala](http://koala-app.com/) (Open Source) _Mac, Win, Linux_
+- [LiveReload](http://livereload.com/) (Paid, Open Source)  _Mac, Win_
+- [Prepros](https://prepros.io/) (Paid) _Mac, Win, Linux_
+- [Scout](http://mhs.github.io/scout-app/) (Open Source) _Mac, Win_
+
+
+---
+
+
 #Bootstrap
 
 
@@ -810,21 +826,21 @@ The most popular front-end framework for developing responsive, mobile first pro
 .columns[.col-30[
   ![Foundation](assets/img/foundation_view.jpg)<br/><br/>
 ].col-70[
-  **Foundation**.  
+  **Foundation**.
   _The most advanced responsive front-end framework in the world._
   [http://foundation.zurb.com/](http://foundation.zurb.com/)
 ]]
 .columns[.col-30[
-  ![Primer](assets/img/primer_view.jpg)<br/><br/>  
+  ![Primer](assets/img/primer_view.jpg)<br/><br/>
 ].col-70[
-  **Primer**.  
+  **Primer**.
   _The CSS toolkit and guidelines that power GitHub._
   [http://primercss.io/](http://primercss.io/)
 ]]
 .columns[.col-30[
   ![Materialize](assets/img/materialize_view.jpg)<br/><br/>
 ].col-70[
-  **Materialize**.  
+  **Materialize**.
   _A modern responsive front-end framework based on Material Design_
   [http://materializecss.com/](http://materializecss.com/)
 ]]
