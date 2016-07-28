@@ -164,6 +164,21 @@ student.describe(); // Vasya
 
 ---
 
+# But where exactly does the [[Prototype]] chain "end"?
+
+The top-end of every *normal* `[[Prototype]]` chain is the built-in `Object.prototype`. This object
+includes a variety of common utilities used all over JS, because all normal objects in JavaScript "descend from"
+the `Object.prototype` object.
+
+Some of them:
+* `Object.prototype.toString()` - Returns a string representation of the object.
+* `Object.prototype.hasOwnProperty()` - Returns a boolean indicating whether an object contains the
+specified property as a direct property of that object and not inherited through the prototype chain.
+* `Object.prototype.isPrototypeOf()` - Returns a boolean indication whether the specified object is in
+the prototype chain of the object this method is called upon.
+
+---
+
 # Change prototype properties
 
 When you change prototype object - all childs are automatically updated:
@@ -258,6 +273,7 @@ function Cat(name) {
   this.name = name;
 }
 
+Cat.ptototype = new Animal();
 Cat.prototype.give = function(item) {
   this.items.push(item);
 };
@@ -267,6 +283,70 @@ var cat = new Cat('cat');
 cat.give('food');
 cat.items; // ['food']
 kitty.items; // ['food'] -> bad, we didn't give anything to kitty
+```
+---
+
+# Inheriting another prototype
+
+```javascript
+var Person = function(name) {
+  this.name = name;
+};
+Person.prototype.greet = function() {
+  console.log('Hi, I am ' + this.name);
+};
+var Employee = function(name, title) {
+  Person.call(this, name);
+  this.title = title;
+};
+Employee.prototype = Object.create(Person.prototype);
+Employee.prototype.constructor = Employee;
+Employee.prototype.greet = function() {
+  console.log('Hi, I am ' + this.name + ', the ' + this.title);
+};
+var Customer = function(name, money) {
+  Person.call(this, name);
+  this.money = money;
+};
+Customer.prototype = Object.create(Person.prototype);
+Customer.prototype.constructor = Customer;
+
+var bob = new Employee('Bob', 'Builder'); bob.greet(); // Hi, I am Bob, the Builder
+var joe = new Customer('Joe', 2000);  joe.greet(); // Hi, I am Joe
+var rg = new Employee('Red Green', 'Handyman'); rg.greet(); // Hi, I am Red Green, the Handyman
+```
+
+---
+
+# ES2015 version
+
+```javascript
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+  greet() {
+    console.log('Hi, I am ' + this.name);
+  }
+}
+class Employee extends Person {
+  constructor(name, title) {
+    super(name);
+    this.title = title;
+  }
+  greet() {
+    console.log('Hi, I am ' + this.name + ', the ' + this.title);
+  }
+}
+class Customer extends Person {
+  constructor(name, money) {
+    super(name);
+    this.money = money;
+  }
+}
+var bob = new Employee('Bob', 'Builder'); bob.greet(); // Hi, I am Bob, the Builder
+var joe = new Customer('Joe', 2000);  joe.greet(); // Hi, I am Joe
+var rg = new Employee('Red Green', 'Handyman'); rg.greet(); // Hi, I am Red Green, the Handyman
 ```
 
 ---
@@ -333,7 +413,7 @@ a.getId(); // -> some random id
 
 ---
 
-# Extending objects (ES 5)
+# Extending objects
 
 To extend objects without constructor you may use:
 
