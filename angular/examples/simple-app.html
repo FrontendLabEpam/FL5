@@ -29,10 +29,13 @@
 </head>
 <body ng-app="simpleApp" ng-controller="Ctrl">
     <input type="text" ng-model="query" placeholder="Search...">
-    <ul>
-        <li ng-repeat="name in students | filter : query">
-            {{ name }}
-        </li>
-    </ul>
+    <p>Found: {{ filtered.length }}</p>
+    <div ng-show="filtered.length" style="background: #ccc; border: 1px solid #ddd; padding: 10px;">
+        <ul ng-show="query.length > 0" >
+            <li ng-repeat="name in students | filter : query as filtered">
+                {{ name }}
+            </li>
+        </ul>
+    </div>
 </body>
 </html>

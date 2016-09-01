@@ -85,12 +85,15 @@ angular.module('simpleApp',[])
 ## HTML markup
 ```html
 <body ng-app="simpleApp" ng-controller="Ctrl">
-    <input type="text" ng-model="query">
-    <ul>
-        <li ng-repeat="name in students | filter : query">
-            {{ name }}
-        </li>
-    </ul>
+    <input type="text" ng-model="query" placeholder="Search...">
+    <p>Found: {{ filtered.length }}</p>
+    <div ng-show="filtered.length" style="background: #ccc; border: 1px solid #ddd; padding: 10px;">
+        <ul ng-show="query.length > 0" >
+            <li ng-repeat="name in students | filter : query as filtered">
+                {{ name }}
+            </li>
+        </ul>
+    </div>
 </body>
 ```
 ]
@@ -104,6 +107,65 @@ class: center middle
 ## !@#$%^%$&
 ]
 ![magic](assets/img/magic.gif)
+
+---
+
+
+class: center, middle
+
+.title[
+# B U T ...
+]
+
+---
+
+
+
+class: center, middle
+
+.title[
+# Simple App - Code
+]
+
+.left[
+## Angular module
+```js
+angular.module('simpleApp',[])
+    .controller('Ctrl', function ( $scope ) {
+        $scope.students = [
+            ...
+        ];
+    });
+```
+]
+
+.left[
+## HTML markup
+```html
+<body ng-app="simpleApp" ng-controller="Ctrl">
+    <input type="text" ng-model="query" placeholder="Search...">
+    <p>Found: {{ filtered.length }}</p>
+*    <div ng-if="filtered.length" style="background: #ccc; border: 1px solid #ddd; padding: 10px;">
+        <ul ng-show="query.length > 0" >
+            <li ng-repeat="name in students | filter : query as filtered">
+                {{ name }}
+            </li>
+        </ul>
+    </div>
+</body>
+```
+]
+
+---
+class: center middle
+
+.title[
+# Simple App Broken :(- [Demo](examples/simple-app-not-working.html)
+]
+
+.demo[
+<iframe src="examples/simple-app-not-working.html" frameborder="0" width="100%" height="80%"></iframe>
+]
 
 ---
 
@@ -125,6 +187,12 @@ class: center middle
 - ##Data Binding
 
 - ##Dependency Injection
+
+- ##Directive
+
+- ##Controller
+
+- ##Service
 ]
 ---
 
@@ -153,6 +221,8 @@ class: center middle
 - ###Scopes provide APIs (***$watch***) to observe model mutations.
 
 - ###Scopes provide APIs (***$apply***) to propagate any model changes through the system into the view from outside of the "Angular realm" (controllers, services, Angular event handlers).
+
+- ###Scopes provide APIs (***$on***, ***$emit***, ***$broadcast***) for dispatching/subscribing custom events
 
 - ###Scopes can be nested to limit access to the properties of application components while providing access to shared model properties. 
 
@@ -232,6 +302,48 @@ someModule.controller('MyController', function($scope, greeter) {
 ]
 
 ---
+
+class: center middle
+
+.title[
+#Directive
+]
+
+.left[
+```js
+myModule.directive('directiveName', function factory(injectables) {
+  var directiveDefinitionObject = {
+    priority: 0,
+    template: '<div></div>',
+    // templateUrl: 'directive.html',
+    transclude: false,
+    restrict: 'E',// 'A', 'C', 'M'
+    scope: false, // true, {}
+    controller: function($scope, $element, $attrs, $transclude, otherInjectables) { ... },
+    controllerAs: 'stringIdentifier',
+    bindToController: false,
+    link: function postLink( scope, iElement, iAttrs, controller ) { ... }
+  };
+  return directiveDefinitionObject;
+});
+```
+```html
+<directive-name></directive-name>
+```
+]
+
+---
+class: center middle
+
+.title[
+#Practice
+]
+
+.left[
+-  ##[Practice](practice/index.html)
+-  ##[Plunkr](https://plnkr.co/edit/ZejRPicd7UjDD3UIso9Y?p=preview)
+]
+---
 # Related resources
 - [AngularJS API Reference](https://docs.angularjs.org/api)
 
@@ -242,6 +354,6 @@ someModule.controller('MyController', function($scope, greeter) {
 <!-- ================== End of Slides ================== -->
 
     <script src="../assets/js/remark-latest.min.js" type="text/javascript"></script>
-    <script type="text/javascript">remark.create({highlightStyle: 'github'});</script>
+    <script type="text/javascript">remark.create({highlightStyle: 'github', highlightLines: true});</script>
 </body>
 </html>
