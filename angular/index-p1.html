@@ -53,7 +53,7 @@ class: center, middle
 class: center middle
 
 .title[
-# Simple App - <a href="examples/simple-app.html" target="_blank">Demo</a>
+# Simple App - [Demo](examples/simple-app.html)
 ]
 
 .demo[
@@ -112,14 +112,128 @@ class: center, middle
 .title[
 ![learning-curve](assets/img/angular-js-learning-curve.png)
 ]
+---
+class: center middle
+
+.title[
+#Concepts
+]
+
+.left[
+- ##Scope
+
+- ##Data Binding
+
+- ##Dependency Injection
+]
+---
+
+class: center middle
+
+.title[
+#Scope
+]
+
+.left[
+- ###Scope is an object that refers to the application model. 
+- ###It is an execution context for expressions. 
+- ###Scopes are arranged in hierarchical structure which mimic the DOM structure of the application. 
+- ###Scopes can watch expressions and propagate events.
+]
 
 ---
 
+class: center middle
+
+.title[
+#Scope Characteristics
+]
+
+.left[
+- ###Scopes provide APIs (***$watch***) to observe model mutations.
+
+- ###Scopes provide APIs (***$apply***) to propagate any model changes through the system into the view from outside of the "Angular realm" (controllers, services, Angular event handlers).
+
+- ###Scopes can be nested to limit access to the properties of application components while providing access to shared model properties. 
+
+- ###Scopes provide context against which ***expressions*** are evaluated.
+]
+---
+class: center middle
+
+.title[
+# Event Loop
+]
+![event-loop](assets/img/event-loop.png)
+
+---
+class: center middle
+
+.title[
+#Data Binding
+]
+
+.left[
+- ###Any changes to the view are immediately reflected in the model, and any changes in the model are propagated to the view. 
+- ###The model is the single-source-of-truth for the application state, greatly simplifying the programming model for the developer. 
+- ###You can think of the view as simply an instant projection of your model.
+]
+
+---
+
+class: center middle
+
+![data-binding](assets/img/data-binding.png)
+---
+class: center middle
+
+.title[
+#Dependency Injection
+]
+
+##There are only three ways a component (object or function) can get a hold of its dependencies:
+
+.left[
+- ###The component can create the dependency, typically using the ***new*** operator.
+- ###The component can look up the dependency, by referring to a global variable.
+- ###The component can have the dependency passed to it where it is needed.
+]
+
+---
+class: center middle
+
+.title[
+#Dependency Annotation
+]
+
+
+
+.left[
+- ###Using the inline array annotation (preferred)
+```js
+someModule.controller('MyController', ['$scope', 'greeter', function($scope, greeter) {
+  // ...
+}]);
+```
+- ###Using the $inject property annotation
+```js
+var MyController = function($scope, greeter) {
+  // ...
+}
+MyController.$inject = ['$scope', 'greeter'];
+someModule.controller('MyController', MyController);
+```
+- ###Implicitly from the function parameter names (has caveats)
+```js
+someModule.controller('MyController', function($scope, greeter) {
+  // ...
+});
+```
+]
+
+---
 # Related resources
-- [Udacity course: JavaScript Design Patterns](https://www.udacity.com/course/javascript-design-patterns--ud989)
-- [TodoMVC - Helping you select an MV* framework](http://todomvc.com/)
-- [MVC app example: todo app](https://github.com/udacity/ud989-retain)
-- [MVC app example: pizza app](https://github.com/udacity/ud989-pizzamvo)
+- [AngularJS API Reference](https://docs.angularjs.org/api)
 
 
 
