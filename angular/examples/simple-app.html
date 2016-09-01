@@ -29,7 +29,7 @@
 </head>
 <body ng-app="simpleApp" ng-controller="Ctrl">
     <input type="text" ng-model="query" placeholder="Search...">
-    <p>Found: {{ filtered.length }}</p>
+    <p>Found: {{ query.length ? filtered.length : 0 }}</p>
     <div ng-show="filtered.length" style="background: #ccc; border: 1px solid #ddd; padding: 10px;">
         <ul ng-show="query.length > 0" >
             <li ng-repeat="name in students | filter : query as filtered">
