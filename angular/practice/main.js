@@ -8,7 +8,7 @@ angular.module('fl', [
   // 'andriy.vasylytsya',
   // 'yura.yarovyj',
   // 'volodymyr.stakhov',
-  // 'yaroslav.melnyk',
+  'yaroslav.melnyk',
   // 'volodymyr.harhay',
   // 'mariana.zadorozhna',
   // 'andriy.leskiv',
