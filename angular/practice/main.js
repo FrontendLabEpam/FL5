@@ -12,7 +12,7 @@ angular.module('fl', [
   'volodymyr.harhay',
   'mariana.zadorozhna',
   // 'andriy.leskiv',
-  // 'marta.dropko',
+  'marta.dropko',
   // 'vitalina.kovalchuk',
   // 'rostyslav.skyba'
 ])
