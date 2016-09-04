@@ -4,7 +4,7 @@ angular.module('fl', [
   // 'pavlo.hibey',
   // 'oksana.kuzmych',
   // 'serhiy.pavlov',
-  // 'tetyana.kandybal',
+  'tetyana.kandybal',
   // 'andriy.vasylytsya',
   // 'yura.yarovyj',
   // 'volodymyr.stakhov',
