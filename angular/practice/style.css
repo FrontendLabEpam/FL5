@@ -1,26 +1,16 @@
-/* Styles go here */
-* {
-  box-sizing: border-box;
-}
-.card {
-  width: 200px;
-  height: 300px;
-  border: 1px solid #ccc;
-  float: left;
-  margin: 10px;
-}
-
-yaroslav-melnyk img{
-	width: 200px;
-	height: 215px;
-}
-yaroslav-melnyk button{
-	width: 200px;
-	height: 30px;
-	background: #27AE60;
-	border-radius: 5px;
-}
-yaroslav-melnyk input{
-	width: 200px;
-	height: 30px;
-}
+@import './app.css';
+@import './roman-mahotsky/style.css';
+@import './pavlo-hibey/style.css';
+@import './oksana-kuzmych/style.css';
+@import './serhiy-pavlov/style.css';
+@import './tetyana-kandybal/style.css';
+@import './andriy-vasylytsya/style.css';
+@import './yura-yarovyj/style.css';
+@import './volodymyr-stakhov/style.css';
+@import './yaroslav-melnyk/style.css';
+@import './volodymyr-harhay/style.css';
+@import './mariana-zadorozhna/style.css';
+@import './andriy-leskiv/style.css';
+@import './marta-dropko/style.css';
+@import './vitalina-kovalchuk/style.css';
+@import './rostyslav-skyba/style.css';
