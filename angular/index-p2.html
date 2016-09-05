@@ -84,11 +84,11 @@ angular.module('myModule', [])
 class: center, middle
 
 .title[
-# Providers
+# Injector
 ]
 
 .left[
-##In Angular apps most of these objects are instantiated and wired together automatically by the ***injector service***.
+##In Angular apps most of the objects are instantiated and wired together automatically by the ***injector service***.
 ```js
 var $injector = angular.injector();
 // inferred (only works if code not minified/obfuscated)
@@ -131,7 +131,7 @@ class: center middle
 class: center, middle
 
 .title[
-# Value
+# Service "Value"
 ]
 
 .left[
@@ -155,7 +155,7 @@ myModule.controller('MyCtrl', function ( $scope, labId ) {
 class: center, middle
 
 .title[
-# Factory
+# Service "Factory"
 ]
 
 .left[
@@ -182,7 +182,7 @@ myModule.controller('MyCtrl', function ( $scope, labInfo ) {
 class: center middle
 
 .title[
-# Service
+# Service "Service"
 ]
 .left[
 ```js
@@ -206,183 +206,35 @@ myModule.controller('MyCtrl', function ( $scope, labInfo ) {
 class: center, middle
 
 .title[
-![learning-curve](assets/img/angular-js-learning-curve.png)
-]
----
-class: center middle
-
-.title[
-#Concepts
+# Service "Provider"
 ]
 
 .left[
-- ##Scope
-
-- ##Data Binding
-
-- ##Dependency Injection
-
-- ##Directive
-
-- ##Controller
-
-- ##Service
-]
----
-
-class: center middle
-
-.title[
-#Scope
-]
-
-.left[
-- ###Scope is an object that refers to the application model. 
-- ###It is an execution context for expressions. 
-- ###Scopes are arranged in hierarchical structure which mimic the DOM structure of the application. 
-- ###Scopes can watch expressions and propagate events.
-]
-
----
-
-class: center middle
-
-.title[
-#Scope Characteristics
-]
-
-.left[
-- ###Scopes provide APIs (***$watch***) to observe model mutations.
-
-- ###Scopes provide APIs (***$apply***) to propagate any model changes through the system into the view from outside of the "Angular realm" (controllers, services, Angular event handlers).
-
-- ###Scopes provide APIs (***$on***, ***$emit***, ***$broadcast***) for dispatching/subscribing custom events
-
-- ###Scopes can be nested to limit access to the properties of application components while providing access to shared model properties. 
-
-- ###Scopes provide context against which ***expressions*** are evaluated.
-]
----
-class: center middle
-
-.title[
-# Event Loop
-]
-![event-loop](assets/img/event-loop.png)
-
----
-class: center middle
-
-.title[
-#Data Binding
-]
-
-.left[
-- ###Any changes to the view are immediately reflected in the model, and any changes in the model are propagated to the view. 
-- ###The model is the single-source-of-truth for the application state, greatly simplifying the programming model for the developer. 
-- ###You can think of the view as simply an instant projection of your model.
-]
-
----
-
-class: center middle
-
-![data-binding](assets/img/data-binding.png)
----
-class: center middle
-
-.title[
-#Dependency Injection
-]
-
-##There are only three ways a component (object or function) can get a hold of its dependencies:
-
-.left[
-- ###The component can create the dependency, typically using the ***new*** operator.
-- ###The component can look up the dependency, by referring to a global variable.
-- ###The component can have the dependency passed to it where it is needed.
-]
-
----
-class: center middle
-
-.title[
-#Dependency Annotation
-]
-
-
-
-.left[
-- ###Using the inline array annotation (preferred)
 ```js
-someModule.controller('MyController', ['$scope', 'greeter', function($scope, greeter) {
-  // ...
-}]);
-```
-- ###Using the $inject property annotation
-```js
-var MyController = function($scope, greeter) {
-  // ...
-}
-MyController.$inject = ['$scope', 'greeter'];
-someModule.controller('MyController', MyController);
-```
-- ###Implicitly from the function parameter names (has caveats)
-```js
-someModule.controller('MyController', function($scope, greeter) {
-  // ...
+myApp.provider('labInfo', function () {
+    var _prefix = '';
+    this.setPrefix = function ( pref ) {
+        _prefix = pref;
+    };
+    this.$get = function ( /* injectables */ ) {
+        return {
+            labId : _prefix + 'FL5'
+        } 
+    }
 });
 ```
-]
-
----
-
-class: center middle
-
-.title[
-#Directive
-]
-
-.left[
 ```js
-myModule.directive('directiveName', function factory(injectables) {
-  var directiveDefinitionObject = {
-    priority: 0,
-    template: '<div></div>',
-    // templateUrl: 'directive.html',
-    transclude: false,
-    restrict: 'E',// 'A', 'C', 'M'
-    scope: false, // true, {}
-    controller: function($scope, $element, $attrs, $transclude, otherInjectables) { ... },
-    controllerAs: 'stringIdentifier',
-    bindToController: false,
-    link: function postLink( scope, iElement, iAttrs, controller ) { ... }
-  };
-  return directiveDefinitionObject;
-});
+myModule.controller('MyCtrl', function ( $scope, labInfo ) {
+    $scope.labInfo = labInfo;
+})
 ```
 ```html
-<directive-name></directive-name>
+<div ng-controller="MyCtrl">
+    Lab ID: <span> {{ labInfo.labId }} </span>
+</div
 ```
 ]
 
----
-class: center middle
-
-.title[
-#Practice
-]
-.middle[
-.img-wrap-70[![practice](assets/img/practice.png)]
-]
-.center[
-##Create angular directive to display/edit student info in card view. ([ref1](practice/index.html), [ref2](https://plnkr.co/edit/ZejRPicd7UjDD3UIso9Y?p=preview))
-]
-.left[
-- create js file called studentname-studentsurname.js (e.g. john-doe.js)
-- create angular module called 'studentname.studentsurname' (e.g. 'john.doe')
-- create angular directive that can be used as element ```<studentname-studentsurname></studentname-studentsurname>``` (e.g. ```<john-doe></john-doe>```)
-]
 ---
 # Related resources
 - [AngularJS API Reference](https://docs.angularjs.org/api)
