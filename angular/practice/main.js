@@ -13,7 +13,7 @@ angular.module('fl', [
   'mariana.zadorozhna',
   // 'andriy.leskiv',
   'marta.dropko',
-  // 'vitalina.kovalchuk',
+  'vitalina.kovalchuk',
   // 'rostyslav.skyba'
 ])
 .controller('MainCtrl', function ($scope) {
