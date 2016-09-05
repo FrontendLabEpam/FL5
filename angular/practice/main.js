@@ -5,7 +5,7 @@ angular.module('fl', [
   // 'oksana.kuzmych',
   // 'serhiy.pavlov',
   'tetyana.kandybal',
-  // 'andriy.vasylytsya',
+  'andriy.vasylytsya',
   'yura.yarovyj',
   // 'volodymyr.stakhov',
   'yaroslav.melnyk',
