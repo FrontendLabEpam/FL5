@@ -3,7 +3,7 @@ angular.module('fl', [
   'roman.mahotsky',
   'pavlo.hibey',
   // 'oksana.kuzmych',
-  // 'serhiy.pavlov',
+  'serhiy.pavlov',
   'tetyana.kandybal',
   'andriy.vasylytsya',
   'yura.yarovyj',
