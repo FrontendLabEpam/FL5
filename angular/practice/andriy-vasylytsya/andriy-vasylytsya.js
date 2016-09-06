@@ -19,8 +19,8 @@ angular.module('andriy.vasylytsya',[])
       }
 
       $scope.saveChanges = function(elem) {
-        var name = document.getElementById('name');
-        var surname = document.getElementById('surname');
+        var name = document.querySelector('.andriy-vasylytsya #name');
+        var surname = document.querySelector('.andriy-vasylytsya #surname');
 
         if ( name.value.length > 0 && surname.value.length > 0 ) {
             $scope.name = name.value;
@@ -37,12 +37,12 @@ angular.module('andriy.vasylytsya',[])
 
     link: function( scope, elem, controller ) {
     // Click on edit button:
-    var editable = document.getElementById('edit');
+    var editable = document.querySelector('.andriy-vasylytsya #edit');
     editable.onclick = function () {
         scope.changeState();
     };
 
-    var saving = document.getElementById('save');
+    var saving = document.querySelector('.andriy-vasylytsya #save');
     saving.onclick = function () {
         scope.saveChanges(elem);
     };

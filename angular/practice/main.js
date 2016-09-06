@@ -2,7 +2,7 @@ angular.module('fl', [
   'some.student',
   'roman.mahotsky',
   'pavlo.hibey',
-  // 'oksana.kuzmych',
+  'oksana.kuzmych',
   'serhiy.pavlov',
   'tetyana.kandybal',
   'andriy.vasylytsya',
