@@ -112,7 +112,7 @@ $injector.invoke(['serviceA', function(serviceA){}]);
 class: center middle
 
 .title[
-# Providers
+# Services
 ## The injector needs to know how to create these objects. 
 ##You tell it by registering a "recipe" for creating your object with the injector.
 ]
@@ -211,7 +211,7 @@ class: center, middle
 
 .left[
 ```js
-myApp.provider('labInfo', function () {
+myModule.provider('labInfo', function () {
     var _prefix = '';
     this.setPrefix = function ( pref ) {
         _prefix = pref;
@@ -231,14 +231,206 @@ myModule.controller('MyCtrl', function ( $scope, labInfo ) {
 ```html
 <div ng-controller="MyCtrl">
     Lab ID: <span> {{ labInfo.labId }} </span>
-</div
+</div>
+```
+]
+
+---
+
+class: center, middle
+
+.title[
+# Module Config
+]
+
+.left[
+```js
+angular.module('myModule', []).
+  .value('a', 123)
+  .factory('a', function() { return 123; })
+  .directive('directiveName', ...)
+  .filter('filterName', ...);
+
+// is same as
+
+angular.module('myModule', []).
+  config(function($provide, $compileProvider, $filterProvider) {
+    $provide.value('a', 123);
+    $provide.factory('a', function() { return 123; });
+    $compileProvider.directive('directiveName', ...);
+    $filterProvider.register('filterName', ...);
+  });
+});
+```
+]
+---
+
+class: center, middle
+
+.title[
+# Module Config
+]
+
+.left[
+```js
+myModule.provider('labInfo', function () {
+    var _prefix = '';
+    this.setPrefix = function ( pref ) {
+        _prefix = pref;
+    };
+    this.$get = function ( /* injectables */ ) {
+        return {
+            labId : _prefix + 'FL5'
+        } 
+    }
+});
+```
+]
+.left[
+```js
+myModule.config(function (labInfoProvider) {
+    labInfoProvider.setPrefix('epam_');
+});
+```
+]
+---
+
+class: center, middle
+
+.title[
+# Built-in Providers
+]
+
+.left.img-wrap-50[
+```js
+$anchorScrollProvider
+$animateProvider
+$compileProvider
+$controllerProvider
+$filterProvider
+*$httpProvider
+$interpolateProvider
+$locationProvider
+$logProvider
+$parseProvider
+$qProvider
+$rootScopeProvider
+$sceDelegateProvider
+$sceProvider
+$templateRequestProvider
+```
+]
+---
+
+class: center, middle
+
+.title[
+# $http service
+]
+
+.left[
+## Basic Usage
+]
+
+.left[
+```js
+$http({
+  method: 'GET',
+  url: '/someUrl'
+}).then(function successCallback(response) {
+    // this callback will be called asynchronously
+    // when the response is available
+  }, function errorCallback(response) {
+    // called asynchronously if an error occurs
+    // or server returns response with an error status.
+  });
+```
+]
+
+.left[
+### Shortcut methods
+]
+.left[
+```js
+$http.get('/someUrl', config).then(successCallback, errorCallback);
+$http.post('/someUrl', data, config).then(successCallback, errorCallback);
+```
+]
+---
+
+class: center, middle
+
+.title[
+# $http service
+]
+
+.left[
+## Response object
+]
+
+.left[
+```js
+{
+    data, // – {string|Object} – The response body transformed with the transform functions.
+    status, // – {number} – HTTP status code of the response.
+    headers, // – {function([headerName])} – Header getter function.
+    config, // – {Object} – The configuration object that was used to generate the request.
+    statusText, // – {string} – HTTP status text of the response.
+}
+```
+]
+---
+
+class: center, middle
+
+.title[
+# UI Router
+]
+
+.left[
+### Angular UI-Router is a client-side Single Page Application routing framework for AngularJS.
+
+### Routing frameworks for SPAs update the browser's URL as the user navigates through the app. Conversely, this allows changes to the browser's URL to drive navigation through the app, thus allowing the user to create a bookmark to a location deep within the SPA.
+
+### UI-Router applications are modeled as a hierarchical tree of states.
+]
+---
+
+class: center, middle
+
+.title[
+# UI Router - Setup
+]
+
+.left[
+```html
+<div ui-view></div>
+```
+]
+
+.left[
+```js
+myModule.config(function($stateProvider) {  
+  $stateProvider
+    .state('state1', {
+      url: "/state1",
+      templateUrl: "partials/state1.html"
+    })
+    .state('state1.list', {
+      url: "/list",
+      templateUrl: "partials/state1.list.html",
+      controller: function($scope) {
+        $scope.items = ["A", "List", "Of", "Items"];
+      }
+    });
+});
 ```
 ]
 
 ---
 # Related resources
 - [AngularJS API Reference](https://docs.angularjs.org/api)
-- [Creating AngularJS Custom Directives](http://weblogs.asp.net/dwahlin/creating-custom-angularjs-directives-part-i-the-fundamentals)
+- [Angular UI Router](https://github.com/angular-ui/ui-router)
 - [Angular 1 Style Guide](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md)
 
 
