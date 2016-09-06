@@ -399,9 +399,10 @@ class: center, middle
 class: center, middle
 
 .title[
-# UI Router - Setup
+# UI Router
 ]
 
+# Setup
 .left[
 ```html
 <div ui-view></div>
@@ -425,6 +426,43 @@ myModule.config(function($stateProvider) {
     });
 });
 ```
+]
+---
+
+class: center, middle
+
+.title[
+# UI Router
+]
+
+# Activating a state
+ 
+.left[
+- Call ``` $state.go() ```. High-level convenience method.
+- Click a link containing the ``` ui-sref ``` directive.
+- Navigate to the url associated with the state.
+]
+---
+
+class: center, middle
+
+.title[
+# UI Router
+]
+
+# State Change Events
+### All these events are fired at the $rootScope level.
+
+.left[
+```js
+$rootScope.$on(
+    'eventName', 
+    function(event, toState, toParams, fromState, fromParams, options){ ///... }
+);
+```
+- ```$stateChangeStart``` - fired when the transition begins.
+- ```$stateChangeSuccess``` - fired once the state transition is complete.
+- ```$stateChangeError``` - fired when an error occurs during transition. 
 ]
 
 ---
